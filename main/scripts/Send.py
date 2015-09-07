@@ -1,39 +1,38 @@
 #!/usr/bin/python
-# Usage ./Send.py [host] [port] [message] [count]
+# P3NT Send
 
 import socket, sys
 
-try:
-	print("[S]>Send")
-	print("[S]>Host:		" + sys.argv[1])
-	print("[S]>Port:		" + sys.argv[2])
-	print("[S]>Message:	" + sys.argv[3])
-	print("[S]>Count:		" + sys.argv[4])
-except:
-	print("[S]>Usage: ./Send.py [host] [port] [message] [count]")
-	sys.exit()
-try:
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-except:
-	print("[S]>Error while trying to create socket")
-	sys.exit()
-try:
-	s.connect((sys.argv[1], int(sys.argv[2])))
-except:
-	print("[S]>Error while trying to connect")
-	sys.exit()
 def send():
 	try:
-		s.send(bytes(sys.argv[3], "utf-8"))
-	except:
-		print("[S]>Error while trying to send message")
+		print("[P3NT]Send")
+		h = input("[P3NT]Host: ")
+		p = input("[P3NT]Port: ")
+		m = input("[P3NT]Message: ")
+		c = input("[P3NT]Count: ")
 	except KeyboardInterrupt:
-		print("[S]>Program terminated")
+		print("[P3NT]Program terminated")
 		sys.exit()
-for i in range(1, int(sys.argv[4])):
-	send()
-try:
-	s.close()
-except:
-	print("[S]>Error while trying to close socket")
+	try:
+		s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	except:
+		print("[P3NT]Error while trying to create socket")
+		sys.exit()
+	try:
+		s.connect((h, int(p)))
+	except:
+		print("[P3NT]Error while trying to connect")
+		sys.exit()
+	def send():
+		try:
+			s.send(bytes(m, "utf-8"))
+		except:
+			print("[P3NT]Error while trying to send message")
+			sys.exit()
+	for i in range(1, int(c)):
+		send()
+	try:
+		s.close()
+	except:
+		print("[P3NT]Error while trying to close socket")
 
